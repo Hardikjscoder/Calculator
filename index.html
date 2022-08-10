@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator With Javascript</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Poppins';
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Calculator with javascript</h1>
+    <div class="calculator">
+      <input type="text" id="output" />
+
+      <table>
+        <tr>
+          <td><button id="clear">C</button></td>
+          <td><button class="back">←</button>
+          </td>
+          <td><button class="operator">^</button></td>
+          <td><button class="operator">-</button></td>
+          <td><button class="operator">π</button></td>
+        </tr>
+        <tr>
+          <td><button>7</button></td>
+          <td><button>8</button></td>
+          <td><button>9</button></td>
+          <td><button class="operator">÷</button></td>
+          <td><button class="operator">e</button></td>
+        </tr>
+        <tr>
+          <td><button>4</button></td>
+          <td><button>5</button></td>
+          <td><button>6</button></td>
+          <td><button class="operator">×</button></td>
+          <td><button class="operator">√</button></td>
+        </tr>
+        <tr>
+          <td><button>1</button></td>
+          <td><button>2</button></td>
+          <td><button>3</button></td>
+          <td><button class="operator">+</button></td>
+          <td><button class="operator">%</button></td>
+        </tr>
+        <tr>
+          <td><button>0</button></td>
+          <td><button>.</button></td>
+          <td><button id="result">=</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const output = document.getElementById("output")
+    let buttons = document.querySelectorAll("button")
+    const audio = new Audio("./assets/sound.wav")
+    let outputValue = ""
+
+    for (button of buttons) {
+      button.addEventListener("click", (e) => {
+        buttonText = e.target.innerText
+        audio.play()
+
+        if (buttonText == "×") {
+          buttonText = "*"
+          outputValue += buttonText
+          output.value = outputValue
+        }
+
+        else if (buttonText == "^") {
+          buttonText = "**"
+          outputValue += buttonText
+          output.value = outputValue
+        }
+
+        else if (buttonText === "÷") {
+          buttonText = "/"
+          outputValue += buttonText
+          output.value = outputValue
+        }
+
+        else if (buttonText === "π") {
+          buttonText = "3.14"
+          outputValue += buttonText
+          output.value = outputValue
+        }
+
+        else if (buttonText === "e") {
+          buttonText = "2.71828182846"
+          outputValue += buttonText
+          output.value = outputValue
+        }
+
+        else if (buttonText == "√") {
+          outputValue = Math.sqrt(outputValue)
+          output.value = outputValue
+        }
+
+        else if (buttonText == "C") {
+          outputValue = ""
+          output.value = outputValue
+        }
+
+        else if (buttonText == "←") {
+          outputValue = outputValue.slice(0, -1)
+          output.value = outputValue
+        }
+
+        else if (buttonText == "=") {
+          output.value = eval(outputValue)
+        }
+
+        else {
+          outputValue += buttonText
+          output.value = outputValue
+        }
+      })
+    }
+
+    output.addEventListener("keydown", () => {
+      alert("Please do not type...")
+    })
+
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>
